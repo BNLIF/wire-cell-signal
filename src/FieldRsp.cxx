@@ -45,7 +45,7 @@ WireCellSignal::FieldRsp::~FieldRsp()
 
 void WireCellSignal::FieldRsp::InitFieldResponse(const float overall_time_offset, const float uv_time_offset, const float uw_time_offset)
 {
-#include "/home/xiaoyueli/BNLIF/wire-cell/2dtoy/src/data.txt" // not ideal. shall be changed later
+#include "../../2dtoy/src/data.txt" // not ideal. shall be changed later
   gFieldResp[0] = new TGraph(5000, xu, yu);
   gFieldResp[1] = new TGraph(5000, xv, yv);
   gFieldResp[2] = new TGraph(5000, xw, yw);
