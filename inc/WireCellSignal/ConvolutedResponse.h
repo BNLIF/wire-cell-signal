@@ -19,7 +19,7 @@ namespace WireCellSignal {
 
   public:
     ConvolutedResponse(const std::string infilename = "convoluted_response.root");
-    ConvolutedResponse(ElectronicsConfig *conf, const std::string garfield_file = "/home/xiaoyueli/BNLIF/wire-cell/signal/dune.root", const float overall_time_offset = -50, const float uv_time_offset = 0, const float uw_time_offset = 0, const std::string outfilename = "convoluted_response.root");
+    ConvolutedResponse(ElectronicsConfig *conf, const std::string garfield_file = "./signal/dune.root", const float overall_time_offset = -50, const float uv_time_offset = 0, const float uw_time_offset = 0, const std::string outfilename = "convoluted_response.root");
     ConvolutedResponse(FieldRsp *fR, GenElecRsp *eR, const std::string outfilename = "convoluted_response.root");
     ~ConvolutedResponse();
     
