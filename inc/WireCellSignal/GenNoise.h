@@ -10,8 +10,8 @@
 #include "TCanvas.h"
 #include "TVirtualFFT.h"
 
-#include "ElectronicsConfig.h"
-#include "GenElecRsp.h"
+#include "WireCellSignal/ElectronicsConfig.h"
+#include "WireCellSignal/GenElecRsp.h"
 
 namespace WireCellSignal {
 
