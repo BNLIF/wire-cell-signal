@@ -1,4 +1,4 @@
-#include "WireCellSignal/GenElecRsp.h"
+#include "WCPSignal/GenElecRsp.h"
 
 double InvTransferFunction(double *x, double *par)
 {
@@ -23,7 +23,7 @@ double InvTransferFunction(double *x, double *par)
 
 }
 
-WireCellSignal::GenElecRsp::GenElecRsp(ElectronicsConfig *c)
+WCPSignal::GenElecRsp::GenElecRsp(ElectronicsConfig *c)
   : config(c)
 {
   shapingTime = config->ShapingTime();
@@ -32,7 +32,7 @@ WireCellSignal::GenElecRsp::GenElecRsp(ElectronicsConfig *c)
   FFTShapingFunction();
 }
 
-WireCellSignal::GenElecRsp::GenElecRsp(ElectronicsConfig *c, double g, double t)
+WCPSignal::GenElecRsp::GenElecRsp(ElectronicsConfig *c, double g, double t)
   : shapingTime(t)
   , gain(g)
   , config(c)
@@ -41,7 +41,7 @@ WireCellSignal::GenElecRsp::GenElecRsp(ElectronicsConfig *c, double g, double t)
   FFTShapingFunction();
 }
 
-WireCellSignal::GenElecRsp::~GenElecRsp()
+WCPSignal::GenElecRsp::~GenElecRsp()
 {
   if(shapingFunction) delete shapingFunction;
   if(hShapingF) delete hShapingF;
@@ -49,7 +49,7 @@ WireCellSignal::GenElecRsp::~GenElecRsp()
   if(hShapingInPhase) delete hShapingInPhase;
 }
 
-void WireCellSignal::GenElecRsp::Init()
+void WCPSignal::GenElecRsp::Init()
 {
   shapingFunction = new TF1("transFunction", InvTransferFunction, 0, 10, 2);
   shapingFunction->SetParameters(gain, shapingTime);
@@ -60,7 +60,7 @@ void WireCellSignal::GenElecRsp::Init()
   }
 }
 
-void WireCellSignal::GenElecRsp::SetShapingFunction(TF1 *f)
+void WCPSignal::GenElecRsp::SetShapingFunction(TF1 *f)
 {
   shapingFunction = f;
   hShapingF->Reset();
@@ -70,7 +70,7 @@ void WireCellSignal::GenElecRsp::SetShapingFunction(TF1 *f)
   }
 }
 
-void WireCellSignal::GenElecRsp::FFTShapingFunction()
+void WCPSignal::GenElecRsp::FFTShapingFunction()
 {
   TVirtualFFT::SetTransform(0);
   hShapingInFreq = hShapingF->FFT(0, "MAG");

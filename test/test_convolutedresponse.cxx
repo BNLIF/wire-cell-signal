@@ -1,14 +1,14 @@
-#include "WireCellSignal/FieldRsp.h"
-#include "WireCellSignal/GenElecRsp.h"
-#include "WireCellSignal/ConvolutedResponse.h"
-#include "WireCellSignal/ElectronicsConfig.h"
+#include "WCPSignal/FieldRsp.h"
+#include "WCPSignal/GenElecRsp.h"
+#include "WCPSignal/ConvolutedResponse.h"
+#include "WCPSignal/ElectronicsConfig.h"
 #include "TApplication.h"
 #include "TCanvas.h"
 #include "TString.h"
 #include "TH1.h"
 #include <iostream>
 
-using namespace WireCellSignal;
+using namespace WCPSignal;
 using namespace std;
 
 int main(int argc, char * argv[])

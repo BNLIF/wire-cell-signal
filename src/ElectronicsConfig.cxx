@@ -1,6 +1,6 @@
-#include "WireCellSignal/ElectronicsConfig.h"
+#include "WCPSignal/ElectronicsConfig.h"
 
-WireCellSignal::ElectronicsConfig::ElectronicsConfig()
+WCPSignal::ElectronicsConfig::ElectronicsConfig()
 {
   gain = 14; // mV/fC
   shpTime = 2; // micro second
@@ -19,6 +19,6 @@ WireCellSignal::ElectronicsConfig::ElectronicsConfig()
 	    << std::endl;
 }
 
-WireCellSignal::ElectronicsConfig::~ElectronicsConfig()
+WCPSignal::ElectronicsConfig::~ElectronicsConfig()
 {
 }

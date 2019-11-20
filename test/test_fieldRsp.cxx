@@ -1,9 +1,9 @@
-#include "WireCellSignal/FieldRsp.h"
-#include "WireCellSignal/ElectronicsConfig.h"
+#include "WCPSignal/FieldRsp.h"
+#include "WCPSignal/ElectronicsConfig.h"
 #include "TApplication.h"
 #include "TCanvas.h"
 
-using namespace WireCellSignal;
+using namespace WCPSignal;
 using namespace std;
 
 int main(int argc, char * argv[])

@@ -1,10 +1,10 @@
-#include "WireCellSignal/GenNoise.h"
+#include "WCPSignal/GenNoise.h"
 
 double PoissonReal(const Double_t *k,  const Double_t *lambda) {
   return TMath::Exp(k[0]*TMath::Log(lambda[0])-lambda[0]) / TMath::Gamma(k[0]+1.);
 }
 
-WireCellSignal::GenNoise::GenNoise(ElectronicsConfig& con, double rand)
+WCPSignal::GenNoise::GenNoise(ElectronicsConfig& con, double rand)
   : config(&con)
 {
   Init(config->ShapingTime());
@@ -38,7 +38,7 @@ WireCellSignal::GenNoise::GenNoise(ElectronicsConfig& con, double rand)
   baseline = -1;
 }
 
-void WireCellSignal::GenNoise::Init(double shapingtime)
+void WCPSignal::GenNoise::Init(double shapingtime)
 {
   double MaxPoissArg = 100.;
   MyPoisson = new TF1("MyPoisson", PoissonReal, 0., MaxPoissArg, 1);
@@ -49,7 +49,7 @@ void WireCellSignal::GenNoise::Init(double shapingtime)
   f1->SetParameters(fitpar);  
 }
 
-WireCellSignal::GenNoise::~GenNoise()
+WCPSignal::GenNoise::~GenNoise()
 {
   delete f1;
   delete MyPoisson;
@@ -58,7 +58,7 @@ WireCellSignal::GenNoise::~GenNoise()
   delete im;
 }
 
-void WireCellSignal::GenNoise::PinkNoise(double rand)
+void WCPSignal::GenNoise::PinkNoise(double rand)
 {
   int NTDC = config->NTDC();
   hFreq->Reset();
@@ -82,7 +82,7 @@ void WireCellSignal::GenNoise::PinkNoise(double rand)
   fb->SetName("noiseInTime");
 }
 
-double WireCellSignal::GenNoise::NoiseRMS()
+double WCPSignal::GenNoise::NoiseRMS()
 {
   double rms = 0;
   for (int i = 0; i < config->NTDC(); ++i) {
@@ -92,28 +92,28 @@ double WireCellSignal::GenNoise::NoiseRMS()
   return rms;
 }
 
-void WireCellSignal::GenNoise::PrintNoiseInTime(TCanvas *c)
+void WCPSignal::GenNoise::PrintNoiseInTime(TCanvas *c)
 {
   if (c) c->cd();
   fb->Draw();
   c->SaveAs("noiseT.pdf");
 }
 
-void WireCellSignal::GenNoise::PrintNoiseInFrequency(TCanvas *c)
+void WCPSignal::GenNoise::PrintNoiseInFrequency(TCanvas *c)
 {
   if (c) c->cd();
   hFreq->Draw();
   c->SaveAs("noiseF.pdf");
 }
 
-TH1* WireCellSignal::GenNoise::NoiseInTime()
+TH1* WCPSignal::GenNoise::NoiseInTime()
 {
   fb->Reset();
   PinkNoise();
   return fb;
 }
 
-double WireCellSignal::GenNoise::GetBaseline()
+double WCPSignal::GenNoise::GetBaseline()
 {
   if (baseline>0) return baseline;
   else {

@@ -1,9 +1,9 @@
-#include "WireCellSignal/GenNoise.h"
-#include "WireCellSignal/ElectronicsConfig.h"
+#include "WCPSignal/GenNoise.h"
+#include "WCPSignal/ElectronicsConfig.h"
 #include "TApplication.h"
 #include "TCanvas.h"
 
-using namespace WireCellSignal;
+using namespace WCPSignal;
 using namespace std;
 
 int main(int argc, char * argv[])

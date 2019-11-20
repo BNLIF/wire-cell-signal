@@ -1,6 +1,6 @@
-#include "WireCellSignal/ConvolutedResponse.h"
+#include "WCPSignal/ConvolutedResponse.h"
 
-WireCellSignal::ConvolutedResponse::ConvolutedResponse(ElectronicsConfig *conf, const std::string garfield_file, const float overall_time_offset, const float uv_time_offset, const float uw_time_offset, const std::string outfilename)
+WCPSignal::ConvolutedResponse::ConvolutedResponse(ElectronicsConfig *conf, const std::string garfield_file, const float overall_time_offset, const float uv_time_offset, const float uw_time_offset, const std::string outfilename)
   : outfile(outfilename)
 {
   fRsp = new FieldRsp(conf, garfield_file.c_str(), 0, overall_time_offset, uv_time_offset, uw_time_offset);
@@ -20,7 +20,7 @@ WireCellSignal::ConvolutedResponse::ConvolutedResponse(ElectronicsConfig *conf, 
   h->Reset();
 }
 
-WireCellSignal::ConvolutedResponse::ConvolutedResponse(const std::string infilename)
+WCPSignal::ConvolutedResponse::ConvolutedResponse(const std::string infilename)
 {
   infile = new TFile(infilename.c_str(), "read");
   for (int i = 0; i < 3; ++i) {
@@ -41,7 +41,7 @@ WireCellSignal::ConvolutedResponse::ConvolutedResponse(const std::string infilen
   h->Reset();
 }
 
-WireCellSignal::ConvolutedResponse::ConvolutedResponse(FieldRsp *fR, GenElecRsp *eR, const std::string outfilename)
+WCPSignal::ConvolutedResponse::ConvolutedResponse(FieldRsp *fR, GenElecRsp *eR, const std::string outfilename)
   : fRsp(fR)
   , eRsp(eR)
   , outfile(outfilename)
@@ -62,7 +62,7 @@ WireCellSignal::ConvolutedResponse::ConvolutedResponse(FieldRsp *fR, GenElecRsp 
   //h->Rebin(5);
 }
 
-WireCellSignal::ConvolutedResponse::~ConvolutedResponse()
+WCPSignal::ConvolutedResponse::~ConvolutedResponse()
 {
   for (int i = 0; i < 3; ++i) {
     for (int j = 0; j < 6; ++j) {
@@ -78,7 +78,7 @@ WireCellSignal::ConvolutedResponse::~ConvolutedResponse()
   if (fRsp) delete fRsp;
 }
 
-TH1F* WireCellSignal::ConvolutedResponse::GetResponseFunction(int plane, int index1, int index2, int Tshift, double charge)
+TH1F* WCPSignal::ConvolutedResponse::GetResponseFunction(int plane, int index1, int index2, int Tshift, double charge)
 {
   //*h = (TH1F*)hRsp[plane][index1][index2+3];//->Clone();
   std::cout<<"plane = "<<plane<<", index1 = "<<index1<<", index2 = "<<index2<<std::endl;
@@ -105,7 +105,7 @@ TH1F* WireCellSignal::ConvolutedResponse::GetResponseFunction(int plane, int ind
   return h;  
 }
 
-void WireCellSignal::ConvolutedResponse::BuildConvolutedResponse()
+void WCPSignal::ConvolutedResponse::BuildConvolutedResponse()
 {
   int NTDC = hRsp[0][0][0]->GetNbinsX();
   double rho, phi;
@@ -139,17 +139,17 @@ void WireCellSignal::ConvolutedResponse::BuildConvolutedResponse()
   delete im;
 }
 /*
-TH1* WireCellSignal::ConvolutedResponse::GetResponseMag(int plane, int point, int wire)
+TH1* WCPSignal::ConvolutedResponse::GetResponseMag(int plane, int point, int wire)
 {  
   return hRspMag[plane][abs(point-4)][wire];
 }
 
-TH1* WireCellSignal::ConvolutedResponse::GetResponsePh(int plane, int point, int wire)
+TH1* WCPSignal::ConvolutedResponse::GetResponsePh(int plane, int point, int wire)
 {
   return hRspPh[plane][abs(point-4)][wire];
 }
 */
-void WireCellSignal::ConvolutedResponse::OutputConvolutedResponse()
+void WCPSignal::ConvolutedResponse::OutputConvolutedResponse()
 {
   TFile f(outfile.c_str(), "recreate");
   f.cd();

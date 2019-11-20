@@ -1,21 +1,21 @@
 #ifndef WIRECELLSIGNAL_DETGENERATIVEFDS
 #define WIRECELLSIGNAL_DETGENERATIVEFDS
 
-#include "WireCellNav/FrameDataSource.h"
-#include "WireCellNav/DetectorGDS.h"
-#include "WireCellNav/WrappedGDS.h"
-#include "WireCellNav/SimDataSource.h"
-#include "WireCellNav/Depositor.h"
-#include "WireCellData/Units.h"
-#include "WireCellData/Vector.h"
-#include "WireCellSignal/ConvolutedResponse.h"
+#include "WCPNav/FrameDataSource.h"
+#include "WCPNav/DetectorGDS.h"
+#include "WCPNav/WrappedGDS.h"
+#include "WCPNav/SimDataSource.h"
+#include "WCPNav/Depositor.h"
+#include "WCPData/Units.h"
+#include "WCPData/Vector.h"
+#include "WCPSignal/ConvolutedResponse.h"
 
 #include "TStopwatch.h"
 #include "TH2F.h"
 #include <math.h>
 #include <fstream>
 
-namespace WireCellSignal {
+namespace WCPSignal {
 
     /** A FrameDataSource which generates frames of traces based on
      * hits from a Depositor object.
@@ -28,7 +28,7 @@ namespace WireCellSignal {
      * given bins_per_frame is digitized and hits are collected onto
      * wires.  Any hits outside the frame are ignored.
      */
-  class DetGenerativeFDS : public WireCell::FrameDataSource , public WireCell::SimDataSource
+  class DetGenerativeFDS : public WCP::FrameDataSource , public WCP::SimDataSource
     {
     public:
 	/** Create a GenerativeFDS.
@@ -48,7 +48,7 @@ namespace WireCellSignal {
 	 * the time collected in one time bin.  Ie, digitization
 	 * period * drift speed.
 	 */	
-      DetGenerativeFDS(const WireCell::Depositor& dep, const WireCell::DetectorGDS& gds,
+      DetGenerativeFDS(const WCP::Depositor& dep, const WCP::DetectorGDS& gds,
 		       int bins_per_frame1 = 9600, int nframes_total = -1,
 		       float bin_drift_distance = 0.5*1.6* units::millimeter,
 		       float unit_dis=1.6,
@@ -61,7 +61,7 @@ namespace WireCellSignal {
 	/// Explicitly set the "frame" (event) to process.  Frame number returned or -1 on error.
 	virtual int jump(int frame_number); 
 
-	virtual WireCell::SimTruthSelection truth() const; 
+	virtual WCP::SimTruthSelection truth() const; 
 
 	void clear(){frame.clear();simtruth.clear();};
 	void SetResponseFunctions(ConvolutedResponse *r) { fRsp = r; }
@@ -71,8 +71,8 @@ namespace WireCellSignal {
 	double tot_collected_charge() {return collected_charge;}	
 
     private:    
-	const WireCell::Depositor& dep;
-	const WireCell::DetectorGDS& det_gds;
+	const WCP::Depositor& dep;
+	const WCP::DetectorGDS& det_gds;
 	TH2F *hraw[4][100][3][2][10]; // hard coded, bad. only works for no more than four cryostats and no more than 100 APAs per cryostat.
 	//TH2D *hconv[4][100][3][2][10];	
 	int  max_frames;
@@ -82,7 +82,7 @@ namespace WireCellSignal {
 	double tot_charge;
 	double collected_charge;
 	ConvolutedResponse *fRsp;
-	mutable WireCell::SimTruthSet simtruth;
+	mutable WCP::SimTruthSet simtruth;
     };
 
 }

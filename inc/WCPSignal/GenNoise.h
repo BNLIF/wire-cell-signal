@@ -10,10 +10,10 @@
 #include "TCanvas.h"
 #include "TVirtualFFT.h"
 
-#include "WireCellSignal/ElectronicsConfig.h"
-#include "WireCellSignal/GenElecRsp.h"
+#include "WCPSignal/ElectronicsConfig.h"
+#include "WCPSignal/GenElecRsp.h"
 
-namespace WireCellSignal {
+namespace WCPSignal {
 
   class GenNoise {
 

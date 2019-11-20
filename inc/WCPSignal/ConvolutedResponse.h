@@ -9,11 +9,11 @@
 #include "TH1F.h"
 #include "TFile.h"
 
-#include "WireCellSignal/ElectronicsConfig.h"
-#include "WireCellSignal/GenElecRsp.h"
-#include "WireCellSignal/FieldRsp.h"
+#include "WCPSignal/ElectronicsConfig.h"
+#include "WCPSignal/GenElecRsp.h"
+#include "WCPSignal/FieldRsp.h"
 
-namespace WireCellSignal {
+namespace WCPSignal {
 
   class ConvolutedResponse {
 

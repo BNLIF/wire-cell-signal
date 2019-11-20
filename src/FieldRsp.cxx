@@ -1,7 +1,7 @@
-#include "WireCellSignal/FieldRsp.h"
+#include "WCPSignal/FieldRsp.h"
 #include "TString.h"
 
-WireCellSignal::FieldRsp::FieldRsp(ElectronicsConfig *con, const float overall_time_offset, const float uv_time_offset, const float uw_time_offset)
+WCPSignal::FieldRsp::FieldRsp(ElectronicsConfig *con, const float overall_time_offset, const float uv_time_offset, const float uw_time_offset)
   : config(con)
 {
   simu2D = false;
@@ -10,7 +10,7 @@ WireCellSignal::FieldRsp::FieldRsp(ElectronicsConfig *con, const float overall_t
   FFTFieldResponse();
 }
 
-WireCellSignal::FieldRsp::FieldRsp(ElectronicsConfig *con, const std::string infilename, TFile *f, const float overall_time_offset, const float uv_time_offset, const float uw_time_offset)
+WCPSignal::FieldRsp::FieldRsp(ElectronicsConfig *con, const std::string infilename, TFile *f, const float overall_time_offset, const float uv_time_offset, const float uw_time_offset)
   : config(con)
   , outfile(f)
 {
@@ -19,7 +19,7 @@ WireCellSignal::FieldRsp::FieldRsp(ElectronicsConfig *con, const std::string inf
   FFTFieldResponse();
 }
 
-WireCellSignal::FieldRsp::~FieldRsp()
+WCPSignal::FieldRsp::~FieldRsp()
 {
   if(!simu2D) {
     for (int i = 0; i < 3; ++i) {
@@ -43,7 +43,7 @@ WireCellSignal::FieldRsp::~FieldRsp()
   if(outfile) outfile->Close();
 }
 
-void WireCellSignal::FieldRsp::InitFieldResponse(const float overall_time_offset, const float uv_time_offset, const float uw_time_offset)
+void WCPSignal::FieldRsp::InitFieldResponse(const float overall_time_offset, const float uv_time_offset, const float uw_time_offset)
 {
 #include "../../2dtoy/src/data.txt" // not ideal. shall be changed later
   gFieldResp[0] = new TGraph(5000, xu, yu);
@@ -74,7 +74,7 @@ void WireCellSignal::FieldRsp::InitFieldResponse(const float overall_time_offset
   }
 }
 
-void WireCellSignal::FieldRsp::InitFieldResponse(const std::string infilename, const float overall_time_offset, const float uv_time_offset, const float uw_time_offset)
+void WCPSignal::FieldRsp::InitFieldResponse(const std::string infilename, const float overall_time_offset, const float uv_time_offset, const float uw_time_offset)
 {
   TFile infile(infilename.c_str(), "read");
   for (int j = 0; j < 6; ++j) {
@@ -130,7 +130,7 @@ void WireCellSignal::FieldRsp::InitFieldResponse(const std::string infilename, c
   }
 }
 
-void WireCellSignal::FieldRsp::DrawFieldResponse(const std::string canvas_name)
+void WCPSignal::FieldRsp::DrawFieldResponse(const std::string canvas_name)
 {
   TCanvas c(canvas_name.c_str(),"",32000,16000);
   if(!simu2D) {
@@ -164,7 +164,7 @@ void WireCellSignal::FieldRsp::DrawFieldResponse(const std::string canvas_name)
   c.SaveAs(Form("%s.pdf", canvas_name.c_str()));
 }
 
-void WireCellSignal::FieldRsp::FFTFieldResponse()
+void WCPSignal::FieldRsp::FFTFieldResponse()
 {
   TVirtualFFT::SetTransform(0);
   TVirtualFFT *ifft;
@@ -207,7 +207,7 @@ void WireCellSignal::FieldRsp::FFTFieldResponse()
   }
 }
 
-void WireCellSignal::FieldRsp::DrawFieldResponseFFT(const std::string canvas_name)
+void WCPSignal::FieldRsp::DrawFieldResponseFFT(const std::string canvas_name)
 {
   TCanvas c(canvas_name.c_str(),"",32000,32000);
   if(!simu2D) {

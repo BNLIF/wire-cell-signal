@@ -1,8 +1,8 @@
-#include "WireCellSignal/DetGenerativeFDS.h"
+#include "WCPSignal/DetGenerativeFDS.h"
 #include "TMath.h"
 
-using namespace WireCellSignal;
-using namespace WireCell;
+using namespace WCPSignal;
+using namespace WCP;
 using namespace std;
 
 namespace {
@@ -14,7 +14,7 @@ namespace {
   }
 }
 
-WireCellSignal::DetGenerativeFDS::DetGenerativeFDS(const Depositor& dep, const DetectorGDS& gds, 
+WCPSignal::DetGenerativeFDS::DetGenerativeFDS(const Depositor& dep, const DetectorGDS& gds, 
 				   int bins_per_frame1, int nframes_total,
 				   float bin_drift_distance, float unit_dis,
 				   float longest_drift)
@@ -60,15 +60,15 @@ WireCellSignal::DetGenerativeFDS::DetGenerativeFDS(const Depositor& dep, const D
   }
 }
 
-WireCellSignal::DetGenerativeFDS::~DetGenerativeFDS()
+WCPSignal::DetGenerativeFDS::~DetGenerativeFDS()
 {
 }
 
-int WireCellSignal::DetGenerativeFDS::size() const { return max_frames; }
+int WCPSignal::DetGenerativeFDS::size() const { return max_frames; }
 
-WireCell::SimTruthSelection WireCellSignal::DetGenerativeFDS::truth() const
+WCP::SimTruthSelection WCPSignal::DetGenerativeFDS::truth() const
 {
-    WireCell::SimTruthSelection ret;
+    WCP::SimTruthSelection ret;
 
     for (auto it = simtruth.begin(); it != simtruth.end(); ++it) {
 	ret.push_back(& (*it));
@@ -76,7 +76,7 @@ WireCell::SimTruthSelection WireCellSignal::DetGenerativeFDS::truth() const
     return ret;
 }
 
-int WireCellSignal::DetGenerativeFDS::jump(int frame_number)
+int WCPSignal::DetGenerativeFDS::jump(int frame_number)
 {  
     if (frame_number < 0) {
 	return -1;
@@ -206,7 +206,7 @@ int WireCellSignal::DetGenerativeFDS::jump(int frame_number)
 	continue;
       }
       
-      WireCell::SimTruth st(pt.x, pt.y, pt.z, charge, tbin, simtruth.size());
+      WCP::SimTruth st(pt.x, pt.y, pt.z, charge, tbin, simtruth.size());
       simtruth.insert(st);
 
       for (int iplane=0; iplane < 3; ++iplane) {

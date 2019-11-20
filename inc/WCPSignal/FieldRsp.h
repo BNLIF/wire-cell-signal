@@ -16,9 +16,9 @@
 #include "TVirtualFFT.h"
 #include "TFile.h"
 
-#include "WireCellSignal/ElectronicsConfig.h"
+#include "WCPSignal/ElectronicsConfig.h"
 
-namespace WireCellSignal {
+namespace WCPSignal {
 
   class FieldRsp {
 

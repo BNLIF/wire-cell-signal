@@ -6,9 +6,9 @@
 #include "TVirtualFFT.h"
 #include "TMath.h"
 
-#include "WireCellSignal/ElectronicsConfig.h"
+#include "WCPSignal/ElectronicsConfig.h"
 
-namespace WireCellSignal {
+namespace WCPSignal {
 
   class GenElecRsp {
 
